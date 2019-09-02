@@ -7,26 +7,70 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-  DialogContentText,
 } from '@material-ui/core';
+
 import { CollectionsBookmark } from '@material-ui/icons';
 import { Header, Card, BoxHeader } from './styles';
 
 import AgileLogo from '../../assets/images/agile-logo.png';
 
 import MainFields from '../../components/MainFields';
+import Modal from '../../components/Modal';
+import ResultCard from '../../components/ResultCard';
 
 export default class Main extends Component {
   state = {
+    form: {
+      user: {
+        type: 'text',
+        value: '',
+      },
+      password: {
+        type: 'password',
+        value: '',
+      },
+      project: {
+        type: 'text',
+        value: '',
+      },
+    },
+
+    user: '',
+    password: '',
+    project: '',
     areResults: false,
     isDialogOpen: false,
     loading: false,
   };
+
+  handleUserChange = e => {
+    this.setState({ user: e.target.value });
+  };
+
+  handlePasswordChange = e => {
+    this.setState({ password: e.target.value });
+  };
+
+  handleProjectChange = e => {
+    this.setState({ project: e.target.value });
+  };
+
+  handleClearClick = () => {
+    this.setState({
+      user: '',
+      password: '',
+      project: '',
+    });
+  };
+
+  // renderForm = () => {
+  //   for (var key in this.state.form) {
+  //     console.log(this.state.form[key].type);
+  //   }
+  //   // this.state.form.map((input) => {
+  //   //   console.log(input);
+  //   // });
+  // };
 
   handleExecuteClick = () => {
     this.setState(prevState => ({
@@ -59,61 +103,22 @@ export default class Main extends Component {
           </BoxHeader>
         </Header>
         <Container>
+          {/* {this.renderForm()} */}
           <Card elevation="5">
             <MainFields
               isExecutable={areResults}
               onExecuteClick={this.handleExecuteClick}
               onGoClick={this.handleGoClick}
             />
-            <Dialog
-              open={isDialogOpen}
-              onClose={this.handleGoClick}
-              aria-labelledby="alert-dialog-title"
-              aria-describedby="alert-dialog-description"
-            >
-              <DialogTitle id="alert-dialog-title">
-                Têm certeza disso?
-              </DialogTitle>
-              <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                  Essa ação será realizada em <b>29</b> itens e não poderá ser
-                  revertida!
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={this.handleGoClick} color="primary">
-                  Naaah
-                </Button>
-                <Button onClick={this.handleGoClick} color="primary" autoFocus>
-                  Bora!
-                </Button>
-              </DialogActions>
-            </Dialog>
           </Card>
 
-          <Card elevation="5" style={{ margin: '20px 0px' }}>
-            <Typography
-              gutterBottom
-              variant="h5"
-              style={{ borderBottom: '1px solid #ccc' }}
-            >
-              Resultados:
-            </Typography>
-            {areResults ? (
-              <List dense>
-                <ListItem button>
-                  <ListItemIcon>
-                    <CollectionsBookmark />
-                  </ListItemIcon>
-                  <ListItemText primary="Single-line item" />
-                </ListItem>
-              </List>
-            ) : (
-              <Typography align="center" variant="subtitle1">
-                Não há resultados para serem mostrados
-              </Typography>
-            )}
-          </Card>
+          <Modal
+            isDialogOpen={isDialogOpen}
+            onClose={this.handleClose}
+            onGoClick={this.handleGoClick}
+          />
+
+          <ResultCard areResults={areResults} />
         </Container>
       </>
     );
