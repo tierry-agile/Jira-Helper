@@ -8,6 +8,7 @@ export const Body = styled.div`
 
 const headerStyle = {
   root: {
+    fontFamily: 'Branding',
     padding: '15px',
     border: 'none',
     borderRadius: '0',

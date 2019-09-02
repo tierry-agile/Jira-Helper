@@ -1,13 +1,20 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 
-import { TextField, InputAdornment, Box, Button } from '@material-ui/core';
+import { InputAdornment, Box } from '@material-ui/core';
 import { Person, Lock, Work } from '@material-ui/icons';
 
-import { FieldsBox, QueryBox, Input } from './styles';
+import {
+  FieldsBox,
+  QueryBox,
+  Input,
+  OutlinedButton,
+  ContainedButton,
+} from './styles';
 
 export default class MainFields extends Component {
   render() {
+    const { isExecutable, onExecuteClick, onGoClick } = this.props;
     return (
       <Box style={{ display: 'flex', flexDirection: 'row' }}>
         <FieldsBox>
@@ -49,24 +56,25 @@ export default class MainFields extends Component {
           />
 
           <Box style={{ display: 'flex', justifyContent: 'center' }}>
-            <Button
-              variant="outlined"
-              color="primary"
-              style={{
-                borderColor: '#1DB954',
-                color: '#1DB954',
-                marginRight: '10px',
-              }}
-            >
+            <OutlinedButton variant="outlined" color="primary">
               Limpar todos os campos
-            </Button>
-            <Button
+            </OutlinedButton>
+
+            <ContainedButton
               variant="contained"
               color="primary"
-              style={{ backgroundColor: '#1DB954' }}
+              onClick={onExecuteClick}
             >
               Executar Query
-            </Button>
+            </ContainedButton>
+
+            <ContainedButton
+              variant="contained"
+              disabled={!isExecutable}
+              onClick={onGoClick}
+            >
+              Taca-le pau!
+            </ContainedButton>
           </Box>
         </FieldsBox>
 
@@ -75,7 +83,7 @@ export default class MainFields extends Component {
             id="query"
             label="Query"
             multiline
-            rows={9}
+            rows={10}
             rowsMax={12}
             fullWidth
             variant="outlined"

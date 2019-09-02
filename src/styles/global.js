@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+import BrandingFont from '../assets/fonts/Branding-Medium.otf';
+
 export default createGlobalStyle`
   * {
     margin: 0;
@@ -12,13 +14,13 @@ export default createGlobalStyle`
         font-family: 'Branding';
         font-style: normal;
         font-stretch: normal;
-        src: local("Branding Medium"), local("Branding-Medium"), url("../assets/fonts/Branding-Medium.otf");
+        src: local("Branding Medium"), local("Branding-Medium"), url(${BrandingFont}) format("otf");
     }
 
     @font-face {
         font-family: 'Open Sans';
         font-stretch: normal;
-        src: local("OpenSans Regular"), local("OpenSans-Regular"), url("../assets/fonts/OpenSans-Regular.ttf");
+        src: local("OpenSans Regular"), local("OpenSans-Regular"), url("../assets/fonts/OpenSans-Regular.ttf") format("ttf");
     }
 
   html, body, #root {
@@ -28,6 +30,6 @@ export default createGlobalStyle`
   body {
     background: #EEE;
     -webkit-font-smoothing: antialiased !important;
-    font-family: 'Open Sans';
+    font-family: 'Branding';
   }
 `;

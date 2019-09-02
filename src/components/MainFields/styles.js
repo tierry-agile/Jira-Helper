@@ -1,4 +1,4 @@
-import { Box, TextField, withStyles } from '@material-ui/core';
+import { Box, TextField, Button, withStyles } from '@material-ui/core';
 
 const boxStyle = {
   root: {
@@ -30,18 +30,16 @@ export const QueryBox = withStyles(queryStyle)(Box);
 const inputStyle = {
   root: {
     '& .Mui-focused': {
-      color: 'green',
-      borderColor: 'red',
+      color: '#1DB954',
     },
 
     '& .MuiInput-underline:after': {
-      borderBottomColor: 'green',
+      borderBottomColor: '#1DB954',
     },
 
     '& .MuiOutlinedInput-root': {
       '&.Mui-focused': {
         '& .MuiOutlinedInput-notchedOutline': {
-          color: '#1DB954',
           borderColor: '#1DB954',
         },
       },
@@ -50,3 +48,34 @@ const inputStyle = {
 };
 
 export const Input = withStyles(inputStyle)(TextField);
+
+const outlinedButtonStyle = {
+  root: {
+    borderColor: '#1DB954',
+    color: '#1DB954',
+    marginRight: '10px',
+
+    '&:hover': {
+      borderColor: 'inherit',
+    },
+  },
+};
+
+export const OutlinedButton = withStyles(outlinedButtonStyle)(Button);
+
+const containedButtonStyle = {
+  root: {
+    backgroundColor: '#1DB954',
+    color: '#FFF',
+
+    '&:hover': {
+      backgroundColor: '#1DB954',
+    },
+
+    '&:last-child': {
+      marginLeft: '10px',
+    },
+  },
+};
+
+export const ContainedButton = withStyles(containedButtonStyle)(Button);
